@@ -22,4 +22,20 @@ Route::group(['middleware'=>'auth'],function (){
         Route::get('/delete/{company}','HomeController@delete');
 
     });
+
+    Route::group(['prefix'=>'client'],function (){
+
+        Route::get('/','ClientController@index');
+
+        Route::get('/add','ClientController@view');
+
+        Route::get('/edit/{client}','ClientController@viewEdit');
+
+        Route::post('/edit/{client}','ClientController@edit');
+
+        Route::post('/save','ClientController@save');
+
+        Route::get('/delete/{client}','ClientController@delete');
+
+    });
 });
