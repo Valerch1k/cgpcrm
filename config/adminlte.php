@@ -243,14 +243,14 @@ return [
 //        ],
         ['header' => 'account_settings'],
         [
-            'text' => 'profile',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
+            'text' => 'company',
+            'url'  => '/',
+            'icon' => 'far fa-building',
         ],
         [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
+            'text' => 'client',
+            'url'  => '/client',
+            'icon' => 'fas fa-fw fa-user',
         ],
     ],
 
