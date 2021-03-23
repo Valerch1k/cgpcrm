@@ -7,13 +7,24 @@
 @stop
 
 @section('content')
+
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <p>List companies</p>
+                    <a type="button" class="btn btn-info" href="{{ url('/companies/add')}}">
+                        <i class="fa fa-plus"></i> &nbsp;
+                    </a>
                 </div>
                 <div class="card-body">
+                    @if (\Illuminate\Support\Facades\Session::has('message'))
+                        <div class="alert alert-success  fade show" role="alert">
+                            {{ \Illuminate\Support\Facades\Session::get('message') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif
                     <table id="example" class="table table-bordered table-hover">
                         <thead>
                         <tr>
@@ -32,8 +43,8 @@
                                 <td>{{$company->description}}</td>
                                 <td>{{$company->created_at}}</td>
                                 <td>
-                                    <button onclick="" class="btn btn-primary btn-sm" ><span class="fas fa-fw fa-pencil-alt"></span></button>
-                                    <button onclick="" class="btn btn-danger btn-sm"  ><span class="fas fa-fw fa-trash"></span></button>
+                                    <a class="btn btn-primary btn-sm" href="{{ url('/companies/edit/' . $company->id)}}" ><span class="fas fa-fw fa-pencil-alt"></span></a>
+                                    <a class="btn btn-danger btn-sm" href="{{ url('/companies/delete/' . $company->id)}}" ><span class="fas fa-fw fa-trash"></span></a>
                                 </td>
                             </tr>
                         @endforeach
@@ -45,41 +56,12 @@
             </div>
         </div>
     </div>
-
 @stop
 
 @section('js')
-<script>
-    {{--$(document).ready(function(){--}}
-
-        {{--$.ajaxSetup({--}}
-            {{--headers:{'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')}--}}
-        {{--});--}}
-
-        {{--// view list users--}}
-        {{--ListViewUsers();--}}
-
-        {{--$('#perPage').on('change', function () {--}}
-            {{--ListViewUsers('?perPage='+this.value);--}}
-        {{--});--}}
-
-        {{--$(document).on('click', '.pagination a', function (e) {--}}
-            {{--getUsersPaginatin($(this).attr('href').split('page=')[1]);--}}
-            {{--e.preventDefault();--}}
-        {{--});--}}
-
-
-    {{--});--}}
-    {{--function ListViewUsers(params = '') {--}}
-        {{--$.ajax({--}}
-            {{--url: "{{route('listUsers')}}"+params,--}}
-            {{--type: 'GET',--}}
-        {{--}).done(--}}
-            {{--function(data) {--}}
-                {{--$('#listUser').trigger("reset");--}}
-                {{--$('#listUser').html(data.html);--}}
-            {{--}--}}
-        {{--);--}}
-    {{--}--}}
-</script>
+    <script>
+        function ShowModalAddUser() {
+            
+        }
+    </script>
 @stop
