@@ -11,12 +11,29 @@ namespace App\Http\Controllers\Api\v1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ValidationClientSave;
 use App\Model\Client;
+use Illuminate\Http\Request;
+
 
 class ClientController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return Client::with('company')->get();
+        $page = (int)$request->query('page','1');
+        $perPage = (int)$request->query('perPage','10');
+        $sortBy =  $request->query('sortBy','created_at');
+        $sortType =  $request->query('sortType','desc');
+
+        $clients = Client:: orderBy($sortBy,$sortType)
+            ->offset(($page - 1) * $perPage)
+            ->limit($perPage);
+
+
+        return $clients->with('company')->get();
+    }
+
+    public function getClientCompanies($idClient)
+    {
+        return Client::find($idClient)->company()->get();
     }
 
     public function show($id)

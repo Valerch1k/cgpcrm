@@ -13,6 +13,7 @@ Route::group(['middleware'=>'auth:api'],function (){
     ], function (){
         Route::get('/', 'ClientController@index');
         Route::get('/{id}', 'ClientController@show');
+        Route::get('client_companies/{id}', 'ClientController@getClientCompanies');
         Route::post('/', 'ClientController@store');
         Route::put('/{id}', 'ClientController@update');
         Route::delete('/{id}', 'ClientController@delete');

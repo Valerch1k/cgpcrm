@@ -11,12 +11,22 @@ namespace App\Http\Controllers\Api\v1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ValidationCompanySave;
 use App\Model\Company;
+use Illuminate\Http\Request;
 
 class CompanyController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return Company::with('clients')->get();
+        $page = (int)$request->query('page','1');
+        $perPage = (int)$request->query('perPage','10');
+        $sortBy =  $request->query('sortBy','created_at');
+        $sortType =  $request->query('sortType','desc');
+
+        $companies = Company:: orderBy($sortBy,$sortType)
+            ->offset(($page - 1) * $perPage)
+            ->limit($perPage);
+
+        return $companies->with('clients')->get();
     }
 
     public function show($id)
