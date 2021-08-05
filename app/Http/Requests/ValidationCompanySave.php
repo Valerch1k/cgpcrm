@@ -28,4 +28,6 @@ class ValidationCompanySave extends FormRequest
             'phone' => 'required|string|max:10',
         ];
     }
+
+
 }
